@@ -1,0 +1,53 @@
+.banner {
+  position: relative;
+  margin-top: 101px;
+}
+
+.image {
+  width: 100%;
+  min-height: 185px;
+  object-fit: conver;
+  object-position: center;
+}
+.nftAndFriends {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+}
+.infoBox {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400px;
+  font-size: 16px;
+  line-height: 120%;
+  text-align: center;
+  color: #fafafa;
+  background: rgba(250, 250, 250, 0.2);
+  backdrop-filter: blur(13.5px);
+  border-radius: 200px;
+  padding: 10px 22px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.banner {
+  position: relative;
+  margin-top: 101px;
+}
+@media only screen and (max-width: 991px) {
+  .banner {
+    margin-top: 165px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .nftAndFriends {
+    justify-content: center;
+  }
+}

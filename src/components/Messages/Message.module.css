@@ -1,0 +1,230 @@
+.messageWrap {
+  padding-block: 30px;
+  background-color: transparent;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 101px;
+  position: relative;
+}
+.messageCont {
+  height: calc(100vh - 151px);
+  min-height: 700px;
+  display: grid;
+  grid-template-columns: 400px 1.5fr;
+  column-gap: 20px;
+  width: 100%;
+  max-width: 90%;
+}
+
+.shadow1 {
+  left: 0;
+  bottom: 0;
+}
+.shadow2 {
+  top: 0;
+  right: 0;
+}
+.messageRooms {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--primary-bg);
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  position: relative;
+  z-index: 1;
+}
+.roomHeader {
+  border-bottom: 1px solid #fafafa33;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-block: 20px;
+  padding-inline: 40px;
+}
+.roomHeader h2 {
+  color: #fafafa;
+  font-weight: 700;
+  font-size: 32px;
+}
+.newChatBtn {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  text-align: center;
+  color: var(--primary-color);
+  background: linear-gradient(
+    89.99deg,
+    #224dbd 0.66%,
+    #3069ff 61.01%,
+    #42ccd7 99.99%
+  );
+  border-radius: 10px;
+  padding: 12px 30px;
+  cursor: pointer;
+}
+.paddingDiv {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  padding-inline: 40px;
+  padding-block: 20px;
+  width: 100%;
+}
+.roomSearch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: rgba(250, 250, 250, 0.2);
+  border-radius: 10px;
+  height: 45px;
+  gap: 10px;
+  padding-inline: 10px;
+}
+.roomSearch input {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  color: #fafafab8;
+  font-weight: 500;
+  font-size: 14px;
+}
+.roomSearch input:placeholder {
+  color: #fafafab8;
+  font-size: 14px;
+  font-weight: 500;
+}
+.roomSearch svg {
+  min-width: 20px;
+  min-height: 20px;
+  object-fit: contain;
+  fill: #fafafab8;
+}
+/* //chat room css ------------------ */
+.roomChat {
+  width: 100%;
+  background-color: var(--primary-bg);
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 30px 40px;
+}
+.chatPart {
+  height: 100%;
+  width: 100%;
+}
+.inputDiv {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.inputDiv button {
+  display: none;
+}
+.inputDiv > input {
+  border: 1.5px solid #fafafa80;
+  width: 100%;
+  border-radius: 10px;
+  height: 40px;
+  color: #fafafa80;
+  font-size: 16px;
+  font-weight: 400;
+  padding-left: 15px;
+  background-color: transparent;
+}
+.rightInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.rightInput img {
+  cursor: pointer;
+}
+.mobToggle,
+.overlay {
+  display: none;
+}
+@media screen and (max-width: 1120px) {
+  .messageCont {
+    grid-template-columns: 350px 1fr;
+  }
+  .roomHeader h2 {
+    font-size: 20px;
+  }
+  .roomHeader,
+  .roomChat,
+  .paddingDiv {
+    padding-inline: 20px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .messageWrap {
+    margin-top: 165px;
+  }
+  .messageCont {
+    height: calc(100vh - 180px);
+  }
+}
+@media screen and (max-width: 814px) {
+  .mobToggle {
+    display: inline-block;
+    width: max-content;
+  }
+  .mobToggle svg {
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+  }
+  .messageWrap {
+    padding-inline: 20px;
+    margin-top: 165px;
+  }
+  .messageCont {
+    max-width: 100%;
+    grid-template-rows: auto 1fr;
+    row-gap: 20px;
+    grid-template-columns: 1fr;
+    height: calc(100vh - 180px);
+  }
+  .messageRooms {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 91;
+    max-width: 350px;
+    transition: all 0.7s ease-in-out;
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 90;
+    cursor: pointer;
+    background-color: black;
+    opacity: 0.7;
+    display: block;
+  }
+}

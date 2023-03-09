@@ -1,0 +1,54 @@
+.posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 5px;
+}
+
+.image {
+  width: 100%;
+}
+.post {
+  background: rgba(250, 250, 250, 0.05);
+  border: 1px solid rgba(250, 250, 250, 0.4);
+  border-radius: 16px;
+  cursor: pointer;
+}
+.detailsContainer {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.id {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 140%;
+  color: #ffffff;
+}
+.valueContainer {
+  background: #224dbd;
+  border-radius: 10px;
+  padding: 6px 8px;
+  display: flex;
+  align-content: center;
+  gap: 8px;
+}
+.value {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 120%;
+  color: #fafafa;
+}
+.lastSale {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 120%;
+  color: rgba(250, 250, 250, 0.72);
+}
