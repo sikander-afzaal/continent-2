@@ -37,7 +37,7 @@
   background-color: var(--primary-bg);
   border-radius: 16px;
   backdrop-filter: blur(20px);
-  position: relative;
+  position: static;
   z-index: 1;
 }
 .roomHeader {
