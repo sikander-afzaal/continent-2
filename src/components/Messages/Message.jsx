@@ -41,6 +41,48 @@ const Message = () => {
         { msg: "How are you", time: "13:45" },
       ],
     },
+    {
+      yourMsg: true,
+      msgs: [
+        { msg: "Hello", time: "13:45" },
+        { msg: "How are you", time: "13:45" },
+      ],
+    },
+    {
+      yourMsg: false,
+      msgs: [
+        { msg: "Hello", time: "13:45" },
+        { msg: "How are you", time: "13:45" },
+      ],
+    },
+    {
+      yourMsg: true,
+      msgs: [
+        { msg: "Hello", time: "13:45" },
+        { msg: "How are you", time: "13:45" },
+      ],
+    },
+    {
+      yourMsg: false,
+      msgs: [
+        { msg: "Hello", time: "13:45" },
+        { msg: "How are you", time: "13:45" },
+      ],
+    },
+    {
+      yourMsg: true,
+      msgs: [
+        { msg: "Hello", time: "13:45" },
+        { msg: "How are you", time: "13:45" },
+      ],
+    },
+    {
+      yourMsg: false,
+      msgs: [
+        { msg: "Hello", time: "13:45" },
+        { msg: "How are you", time: "13:45" },
+      ],
+    },
   ]);
   const addMsg = (e) => {
     e.preventDefault();
