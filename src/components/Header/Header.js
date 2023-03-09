@@ -29,7 +29,7 @@ const Header = () => {
         </div>
         <div className={styles.userProfile}>
           <img src={notification} alt="" className={styles.icon} />
-          <Link to={"/messages"} className={styles.icon}>
+          <Link to={"/messages/1"} className={styles.icon}>
             <img src={messenger} alt="" />
           </Link>
           <div className={styles.userContainer}>

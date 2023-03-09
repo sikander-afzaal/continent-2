@@ -17,9 +17,7 @@ function App() {
             <Route path="/" element={<MyProfile />}></Route>
             <Route path="/userProfile" element={<UserProfile />}></Route>
             <Route path="/editprofile" element={<EditProfile />}></Route>
-            <Route path="/messages/" element={<Message />}>
-              <Route path=":id" element={<ChatRoom />} />
-            </Route>
+            <Route path="/messages/:id" element={<Message />} />
           </Routes>
         </div>
       </BrowserRouter>

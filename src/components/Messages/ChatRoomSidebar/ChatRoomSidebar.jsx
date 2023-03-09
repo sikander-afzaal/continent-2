@@ -9,11 +9,12 @@ const ChatRoomSidebar = ({
   img = userImg,
   time,
   setRoomToggle,
+  id,
 }) => {
   return (
     <Link
       onClick={() => setRoomToggle(false)}
-      to={"/messages/1"}
+      to={`/messages/${id}`}
       className={styles.chatRoom}
     >
       <img src={img} alt="" />

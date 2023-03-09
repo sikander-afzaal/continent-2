@@ -6,11 +6,67 @@ import imageInput from "../../images/image-add.png";
 import micImage from "../../images/mic.png";
 import { useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
+import ChatRoom from "./ChatRoom/ChatRoom";
 
 const Message = () => {
   const { id } = useParams();
   const [roomToggle, setRoomToggle] = useState(false);
   const [inputMsg, setInputMsg] = useState("");
+  const [dummyMsgs, setDummyMsgs] = useState([
+    {
+      yourMsg: true,
+      msgs: [
+        { msg: "Hello", time: "13:45" },
+        { msg: "How are you", time: "13:45" },
+      ],
+    },
+    {
+      yourMsg: false,
+      msgs: [
+        { msg: "Hello", time: "13:45" },
+        { msg: "How are you", time: "13:45" },
+      ],
+    },
+    {
+      yourMsg: true,
+      msgs: [
+        { msg: "Hello", time: "13:45" },
+        { msg: "How are you", time: "13:45" },
+      ],
+    },
+    {
+      yourMsg: false,
+      msgs: [
+        { msg: "Hello", time: "13:45" },
+        { msg: "How are you", time: "13:45" },
+      ],
+    },
+  ]);
+  const addMsg = (e) => {
+    e.preventDefault();
+    if (!inputMsg) return;
+    const copy = [...dummyMsgs];
+    let yourMsg = true;
+    copy.forEach((elem, idx) => {
+      if (idx === copy.length - 1) {
+        if (elem.yourMsg) {
+          elem.msgs.push({ msg: inputMsg, time: "13:45" });
+        } else {
+          yourMsg = false;
+        }
+      }
+    });
+
+    if (yourMsg) {
+      setDummyMsgs(copy);
+    } else {
+      setDummyMsgs((prev) => [
+        ...prev,
+        { yourMsg: true, msgs: [{ msg: inputMsg, time: "13:45" }] },
+      ]);
+    }
+    setInputMsg("");
+  };
   return (
     <div className={`${styles.messageWrap} wrapper`}>
       {roomToggle && (
@@ -42,6 +98,7 @@ const Message = () => {
               <input type="text" placeholder="Search direct message" />
             </div>
             <ChatRoomSidebar
+              id={1}
               setRoomToggle={setRoomToggle}
               username="Username"
               latestMsg="Sure! Let me see if there is any other sp"
@@ -50,18 +107,21 @@ const Message = () => {
               typing
             />
             <ChatRoomSidebar
+              id={2}
               setRoomToggle={setRoomToggle}
               username="Username"
               latestMsg="Sure! Let me see if there is any other sp"
               time="2m"
             />
             <ChatRoomSidebar
+              id={3}
               setRoomToggle={setRoomToggle}
               username="Username"
               latestMsg="Sure! Let me see if there is any other sp"
               time="2m"
             />
             <ChatRoomSidebar
+              id={4}
               setRoomToggle={setRoomToggle}
               username="Username"
               latestMsg="Sure! Let me see if there is any other sp"
@@ -71,15 +131,10 @@ const Message = () => {
           </div>
         </div>
         <div className={styles.roomChat}>
-          <div className={styles.chatPart}>{id && <Outlet />}</div>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (id === "") return;
-              setInputMsg("");
-            }}
-            className={styles.inputDiv}
-          >
+          <div className={styles.chatPart}>
+            <ChatRoom DUMMY_MSGS={dummyMsgs} />
+          </div>
+          <form onSubmit={addMsg} className={styles.inputDiv}>
             <input
               value={inputMsg}
               onChange={(e) => setInputMsg(e.target.value)}

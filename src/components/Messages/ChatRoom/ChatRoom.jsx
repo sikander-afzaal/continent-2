@@ -2,37 +2,7 @@ import styles from "./ChatRoom.module.css";
 import userImg from "../../../images/user.png";
 import { useParams } from "react-router-dom";
 
-const ChatRoom = () => {
-  const DUMMY_MSGS = [
-    {
-      yourMsg: true,
-      msgs: [
-        { msg: "Hello", time: "13:45" },
-        { msg: "How are you", time: "13:45" },
-      ],
-    },
-    {
-      yourMsg: false,
-      msgs: [
-        { msg: "Hello", time: "13:45" },
-        { msg: "How are you", time: "13:45" },
-      ],
-    },
-    {
-      yourMsg: true,
-      msgs: [
-        { msg: "Hello", time: "13:45" },
-        { msg: "How are you", time: "13:45" },
-      ],
-    },
-    {
-      yourMsg: false,
-      msgs: [
-        { msg: "Hello", time: "13:45" },
-        { msg: "How are you", time: "13:45" },
-      ],
-    },
-  ];
+const ChatRoom = ({ DUMMY_MSGS }) => {
   const { id } = useParams();
   return (
     <div className={styles.chatRoom}>
@@ -44,9 +14,10 @@ const ChatRoom = () => {
         </div>
       </div>
       <div className={styles.chatMsgs}>
-        {DUMMY_MSGS.map((elem, idx) => {
-          return <ChatMsg key={idx + new Date()} {...elem} />;
-        })}
+        {id &&
+          DUMMY_MSGS.map((elem, idx) => {
+            return <ChatMsg key={idx + new Date()} {...elem} />;
+          })}
       </div>
     </div>
   );
