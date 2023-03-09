@@ -1,0 +1,53 @@
+.chatRoom {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  user-select: none;
+  cursor: pointer;
+}
+.chatRoom > img {
+  min-width: 45px;
+  max-width: 45px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+.rightRoom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+  color: white;
+  width: 100%;
+}
+.roomDetails {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 5px;
+}
+.rightRoom h4 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #fafafa;
+}
+.rightRoom p {
+  font-size: 14px;
+}
+.rightRoom p span {
+  color: #41c6da;
+}
+
+.unread {
+  color: var(--primary-bg);
+  background-color: #41c6da;
+  width: 23px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 500;
+  display: grid;
+  place-items: center;
+}

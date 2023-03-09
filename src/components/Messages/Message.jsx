@@ -1,13 +1,16 @@
 import { BiSearch } from "react-icons/bi";
 import { RxHamburgerMenu } from "react-icons/rx";
-import ChatRoom from "./ChatRoom/ChatRoom";
+import ChatRoomSidebar from "./ChatRoomSidebar/ChatRoomSidebar";
 import styles from "./Message.module.css";
 import imageInput from "../../images/image-add.png";
 import micImage from "../../images/mic.png";
 import { useState } from "react";
+import { Outlet, useParams } from "react-router-dom";
 
 const Message = () => {
+  const { id } = useParams();
   const [roomToggle, setRoomToggle] = useState(false);
+  const [inputMsg, setInputMsg] = useState("");
   return (
     <div className={`${styles.messageWrap} wrapper`}>
       {roomToggle && (
@@ -38,7 +41,7 @@ const Message = () => {
               <BiSearch />
               <input type="text" placeholder="Search direct message" />
             </div>
-            <ChatRoom
+            <ChatRoomSidebar
               setRoomToggle={setRoomToggle}
               username="Username"
               latestMsg="Sure! Let me see if there is any other sp"
@@ -46,19 +49,19 @@ const Message = () => {
               unread={2}
               typing
             />
-            <ChatRoom
+            <ChatRoomSidebar
               setRoomToggle={setRoomToggle}
               username="Username"
               latestMsg="Sure! Let me see if there is any other sp"
               time="2m"
             />
-            <ChatRoom
+            <ChatRoomSidebar
               setRoomToggle={setRoomToggle}
               username="Username"
               latestMsg="Sure! Let me see if there is any other sp"
               time="2m"
             />
-            <ChatRoom
+            <ChatRoomSidebar
               setRoomToggle={setRoomToggle}
               username="Username"
               latestMsg="Sure! Let me see if there is any other sp"
@@ -68,9 +71,21 @@ const Message = () => {
           </div>
         </div>
         <div className={styles.roomChat}>
-          <div className={styles.chatPart}></div>
-          <form className={styles.inputDiv}>
-            <input type="text" placeholder="Write message..." />
+          <div className={styles.chatPart}>{id && <Outlet />}</div>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (id === "") return;
+              setInputMsg("");
+            }}
+            className={styles.inputDiv}
+          >
+            <input
+              value={inputMsg}
+              onChange={(e) => setInputMsg(e.target.value)}
+              type="text"
+              placeholder="Write message..."
+            />
             <div className={styles.rightInput}>
               <img src={imageInput} alt="" />
               <img src={micImage} alt="" />

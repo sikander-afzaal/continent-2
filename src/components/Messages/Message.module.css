@@ -115,6 +115,8 @@
 }
 /* //chat room css ------------------ */
 .roomChat {
+  position: relative;
+  z-index: 2;
   width: 100%;
   background-color: var(--primary-bg);
   height: 100%;
@@ -125,7 +127,7 @@
   gap: 20px;
   backdrop-filter: blur(20px);
   border-radius: 16px;
-  padding: 30px 40px;
+  padding-bottom: 30px;
 }
 .chatPart {
   height: 100%;
@@ -137,6 +139,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+  padding-inline: 40px;
 }
 .inputDiv button {
   display: none;
@@ -173,7 +176,7 @@
     font-size: 20px;
   }
   .roomHeader,
-  .roomChat,
+  .inputDiv,
   .paddingDiv {
     padding-inline: 20px;
   }
