@@ -139,7 +139,10 @@ const Message = () => {
             <div className={styles.roomHeader}>
               <h2>Messages</h2>
               <button
-                onClick={() => setOpenNewMsgModal(true)}
+                onClick={() => {
+                  setOpenNewMsgModal(true);
+                  setRoomToggle(false);
+                }}
                 className={styles.newChatBtn}
               >
                 Start New Chat
