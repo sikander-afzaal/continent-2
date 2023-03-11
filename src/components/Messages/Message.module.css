@@ -1,21 +1,21 @@
 .messageWrap {
-  padding-block: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   background-color: transparent;
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 101px;
   position: relative;
-  max-height: 100vh;
 }
 .messageCont {
-  height: calc(100vh - 151px);
-  min-height: 700px;
+  /* max-height: calc(100vh - 151px); */
   display: grid;
   grid-template-columns: 400px 1.5fr;
   column-gap: 20px;
   width: 100%;
+  align-items: flex-start;
   max-width: 90%;
 }
 
@@ -40,6 +40,8 @@
   backdrop-filter: blur(20px);
   position: static;
   z-index: 1;
+  overflow-y: auto;
+  max-height: calc(100vh - 160px);
 }
 .roomHeader {
   border-bottom: 1px solid #fafafa33;
@@ -48,7 +50,7 @@
   align-items: center;
   width: 100%;
   padding-block: 20px;
-  padding-inline: 40px;
+  padding-inline: 20px;
 }
 .roomHeader h2 {
   color: #fafafa;
@@ -79,7 +81,7 @@
   align-items: center;
   flex-direction: column;
   gap: 30px;
-  padding-inline: 40px;
+  padding-inline: 20px;
   padding-block: 20px;
   width: 100%;
 }
@@ -121,16 +123,18 @@
   width: 100%;
   background-color: var(--primary-bg);
   height: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
   gap: 20px;
   backdrop-filter: blur(20px);
   border-radius: 16px;
   padding-bottom: 30px;
+  max-height: calc(100vh - 160px);
 }
 .chatPart {
-  height: 100%;
+  height: calc(100% - 40px);
   width: 100%;
 }
 .inputDiv {
@@ -208,7 +212,8 @@
     grid-template-rows: auto 1fr;
     row-gap: 20px;
     grid-template-columns: 1fr;
-    height: calc(100vh - 180px);
+    max-height: none;
+    height: auto;
   }
   .messageRooms {
     position: fixed;
@@ -229,5 +234,9 @@
     background-color: black;
     opacity: 0.7;
     display: block;
+  }
+  .roomChat {
+    max-height: 100%;
+    max-height: 600px;
   }
 }

@@ -170,6 +170,68 @@ const Message = () => {
               time="2m"
               unread={2}
             />
+            <ChatRoomSidebar
+              id={1}
+              setRoomToggle={setRoomToggle}
+              username="Username"
+              latestMsg="Sure! Let me see if there is any other sp"
+              time="2m"
+              unread={2}
+              typing
+            />
+            <ChatRoomSidebar
+              id={2}
+              setRoomToggle={setRoomToggle}
+              username="Username"
+              latestMsg="Sure! Let me see if there is any other sp"
+              time="2m"
+            />
+            <ChatRoomSidebar
+              id={3}
+              setRoomToggle={setRoomToggle}
+              username="Username"
+              latestMsg="Sure! Let me see if there is any other sp"
+              time="2m"
+            />
+            <ChatRoomSidebar
+              id={4}
+              setRoomToggle={setRoomToggle}
+              username="Username"
+              latestMsg="Sure! Let me see if there is any other sp"
+              time="2m"
+              unread={2}
+            />
+            <ChatRoomSidebar
+              id={1}
+              setRoomToggle={setRoomToggle}
+              username="Username"
+              latestMsg="Sure! Let me see if there is any other sp"
+              time="2m"
+              unread={2}
+              typing
+            />
+            <ChatRoomSidebar
+              id={2}
+              setRoomToggle={setRoomToggle}
+              username="Username"
+              latestMsg="Sure! Let me see if there is any other sp"
+              time="2m"
+            />
+            <ChatRoomSidebar
+              id={3}
+              setRoomToggle={setRoomToggle}
+              username="Username"
+              latestMsg="Sure! Let me see if there is any other sp"
+              time="2m"
+            />
+            <ChatRoomSidebar
+              id={4}
+              setRoomToggle={setRoomToggle}
+              username="Username"
+              latestMsg="Sure! Let me see if there is any other sp"
+              time="2m"
+              unread={2}
+            />
           </div>
         </div>
         <div className={styles.roomChat}>
