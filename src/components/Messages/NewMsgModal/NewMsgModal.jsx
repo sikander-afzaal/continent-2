@@ -114,41 +114,43 @@ const NewMsgModal = ({ setOpenNewMsgModal }) => {
         </div>
         <div className={styles.suggestionDiv}>
           <h3>Suggestions</h3>
-          {dummyPeople.map((elem, idx) => {
-            return (
-              <div
-                key={idx + new Date() + "suggest"}
-                className={styles.suggestedPerson}
-              >
-                <div className={styles.leftSuggest}>
-                  <img src={elem.img} alt="" />
-                  <p>{elem.name}</p>
-                </div>
-                <button
-                  onClick={() => {
-                    addingPeople(idx);
-                  }}
-                  className={styles.checkBox}
+          {dummyPeople
+            .filter((elem) => elem.name.includes(searchedPerson))
+            .map((elem, idx) => {
+              return (
+                <div
+                  key={idx + new Date() + "suggest"}
+                  className={styles.suggestedPerson}
                 >
-                  {elem.selected && (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="black"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M4.5 12.75l6 6 9-13.5"
-                      />
-                    </svg>
-                  )}
-                </button>
-              </div>
-            );
-          })}
+                  <div className={styles.leftSuggest}>
+                    <img src={elem.img} alt="" />
+                    <p>{elem.name}</p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      addingPeople(idx);
+                    }}
+                    className={styles.checkBox}
+                  >
+                    {elem.selected && (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="black"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M4.5 12.75l6 6 9-13.5"
+                        />
+                      </svg>
+                    )}
+                  </button>
+                </div>
+              );
+            })}
         </div>
         <button className={styles.button}>Next</button>
       </div>
