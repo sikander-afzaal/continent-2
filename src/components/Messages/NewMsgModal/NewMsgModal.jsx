@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./NewMsgModal.module.css";
 import userImg from "../../../images/user.png";
 
@@ -46,6 +46,19 @@ const NewMsgModal = ({ setOpenNewMsgModal }) => {
     },
   ]);
   const [searchedPerson, setSearchedPerson] = useState("");
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    setTags(dummyPeople.filter((elem) => elem.selected));
+  }, [dummyPeople]);
+
+  const removeTag = (id) => {
+    setDummyPeople((prev) => {
+      prev[id].selected = false;
+      return prev;
+    });
+  };
+
   return (
     <>
       <div
@@ -73,7 +86,16 @@ const NewMsgModal = ({ setOpenNewMsgModal }) => {
         <div className={styles.addGrid}>
           <p>To:</p>
           <div className={styles.addedPeople}>
-            <TaggedPerson />
+            {tags.map((elem, idx) => {
+              return (
+                <TaggedPerson
+                  name={elem.name}
+                  changeHandler={removeTag}
+                  idx={idx}
+                />
+              );
+            })}
+
             <input
               value={searchedPerson}
               onChange={(e) => setSearchedPerson(e.target.value)}
@@ -131,11 +153,12 @@ const NewMsgModal = ({ setOpenNewMsgModal }) => {
 
 export default NewMsgModal;
 
-const TaggedPerson = () => {
+const TaggedPerson = ({ name, id, changeHandler }) => {
   return (
     <div className={styles.taggedPerson}>
-      <p>username2</p>{" "}
+      <p>{name}</p>{" "}
       <svg
+        onClick={() => changeHandler(id)}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
