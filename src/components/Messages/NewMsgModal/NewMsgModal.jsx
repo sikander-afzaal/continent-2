@@ -89,6 +89,7 @@ const NewMsgModal = ({ setOpenNewMsgModal }) => {
             {tags.map((elem, idx) => {
               return (
                 <TaggedPerson
+                  key={idx + "tagged"}
                   name={elem.name}
                   changeHandler={removeTag}
                   idx={idx}
@@ -119,8 +120,9 @@ const NewMsgModal = ({ setOpenNewMsgModal }) => {
                 <button
                   onClick={() => {
                     setDummyPeople((prev) => {
-                      prev[idx].selected = !prev[idx].selected;
-                      return prev;
+                      const copy = [...prev];
+                      copy[idx].selected = !prev[idx].selected;
+                      return copy;
                     });
                   }}
                   className={styles.checkBox}
