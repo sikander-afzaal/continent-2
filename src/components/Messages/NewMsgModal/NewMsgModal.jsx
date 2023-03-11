@@ -46,12 +46,29 @@ const NewMsgModal = ({ setOpenNewMsgModal }) => {
     },
   ]);
   const [searchedPerson, setSearchedPerson] = useState("");
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState([
+    {
+      name: "username",
+      img: userImg,
+      selected: true,
+    },
+    {
+      name: "username",
+      img: userImg,
+      selected: true,
+    },
+  ]);
 
   useEffect(() => {
     setTags(dummyPeople.filter((elem) => elem.selected));
   }, [dummyPeople]);
-
+  const addingPeople = (idx) => {
+    setDummyPeople((prev) => {
+      const copy = [...prev];
+      copy[idx].selected = !prev[idx].selected;
+      return copy;
+    });
+  };
   const removeTag = (id) => {
     setDummyPeople((prev) => {
       prev[id].selected = false;
@@ -119,11 +136,7 @@ const NewMsgModal = ({ setOpenNewMsgModal }) => {
                 </div>
                 <button
                   onClick={() => {
-                    setDummyPeople((prev) => {
-                      const copy = [...prev];
-                      copy[idx].selected = !prev[idx].selected;
-                      return copy;
-                    });
+                    addingPeople(idx);
                   }}
                   className={styles.checkBox}
                 >
@@ -155,12 +168,12 @@ const NewMsgModal = ({ setOpenNewMsgModal }) => {
 
 export default NewMsgModal;
 
-const TaggedPerson = ({ name, id, changeHandler }) => {
+const TaggedPerson = ({ name, idx, changeHandler }) => {
   return (
     <div className={styles.taggedPerson}>
       <p>{name}</p>{" "}
       <svg
-        onClick={() => changeHandler(id)}
+        onClick={() => changeHandler(idx)}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
