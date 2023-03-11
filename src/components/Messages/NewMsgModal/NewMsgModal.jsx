@@ -97,10 +97,8 @@ const NewMsgModal = ({ setOpenNewMsgModal }) => {
                 <button
                   onClick={() => {
                     setDummyPeople((prev) => {
-                      const copy = [...prev];
-                      copy[idx].selected = !prev[idx].selected;
-
-                      return copy;
+                      prev[idx].selected = !prev[idx].selected;
+                      return prev;
                     });
                   }}
                   className={styles.checkBox}

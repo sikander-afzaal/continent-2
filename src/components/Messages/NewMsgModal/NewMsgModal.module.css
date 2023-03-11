@@ -140,10 +140,12 @@
   cursor: pointer;
   /* //checked box  */
   background-color: #41c6da;
+  pointer-events: all;
 }
 .checkBox svg {
   width: 17px;
   object-fit: contain;
+  pointer-events: none;
 }
 .button {
   font-family: "Roboto";
