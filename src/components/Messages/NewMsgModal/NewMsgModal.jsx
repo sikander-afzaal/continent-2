@@ -46,18 +46,7 @@ const NewMsgModal = ({ setOpenNewMsgModal }) => {
     },
   ]);
   const [searchedPerson, setSearchedPerson] = useState("");
-  const [tags, setTags] = useState([
-    {
-      name: "username",
-      img: userImg,
-      selected: true,
-    },
-    {
-      name: "username",
-      img: userImg,
-      selected: true,
-    },
-  ]);
+  const [tags, setTags] = useState();
 
   useEffect(() => {
     setTags(dummyPeople.filter((elem) => elem.selected));
@@ -69,10 +58,11 @@ const NewMsgModal = ({ setOpenNewMsgModal }) => {
       return copy;
     });
   };
-  const removeTag = (id) => {
+  const removeTag = (idx) => {
     setDummyPeople((prev) => {
-      prev[id].selected = false;
-      return prev;
+      const copy = [...prev];
+      copy[idx].selected = false;
+      return copy;
     });
   };
 
