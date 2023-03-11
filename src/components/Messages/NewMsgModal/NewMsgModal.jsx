@@ -46,7 +46,7 @@ const NewMsgModal = ({ setOpenNewMsgModal }) => {
     },
   ]);
   const [searchedPerson, setSearchedPerson] = useState("");
-  const [tags, setTags] = useState();
+  const [tags, setTags] = useState([]);
 
   useEffect(() => {
     setTags(dummyPeople.filter((elem) => elem.selected));
