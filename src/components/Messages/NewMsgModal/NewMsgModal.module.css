@@ -1,0 +1,192 @@
+.overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.6;
+  z-index: 88;
+}
+.modalWrapp {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 480px;
+  max-height: 630px;
+  overflow-y: auto;
+  z-index: 90;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 30px;
+  border-radius: 8px;
+  background-color: var(--primary-bg);
+}
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+.modalHeader h3 {
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+.modalHeader svg {
+  width: 30px;
+  object-fit: contain;
+  cursor: pointer;
+}
+.addGrid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  width: 100%;
+  gap: 10px;
+  align-items: flex-start;
+}
+.addGrid > p {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.addedPeople {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.addedPeople input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: white;
+}
+.taggedPerson {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px;
+  gap: 4px;
+  background-color: white;
+  border-radius: 8px;
+  color: var(--primary-bg);
+}
+.taggedPerson p {
+  font-size: 16px;
+}
+.taggedPerson svg {
+  width: 15px;
+  object-fit: contain;
+  cursor: pointer;
+}
+.suggestionDiv {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+.suggestionDiv h3 {
+  font-size: 20px;
+  color: white;
+  font-weight: 700;
+}
+.suggestedPerson {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+.leftSuggest {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+.leftSuggest img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border: 50%;
+}
+.leftSuggest p {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+}
+.checkBox {
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  min-width: 30px;
+  border: 1.5px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  /* //checked box  */
+  background-color: #41c6da;
+}
+.checkBox svg {
+  width: 17px;
+  object-fit: contain;
+}
+.button {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 140%;
+  text-align: center;
+  color: var(--primary-color);
+  background: linear-gradient(
+    89.99deg,
+    #224dbd 0.66%,
+    #3069ff 61.01%,
+    #42ccd7 99.99%
+  );
+  border-radius: 10px;
+  padding: 10px 45px;
+  cursor: pointer;
+  width: 100%;
+}
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+.suggestionDiv {
+  scrollbar-width: thin;
+  scrollbar-color: #224dbd rgba(250, 250, 250, 0.2);
+}
+
+/* Chrome, Edge, and Safari */
+.suggestionDiv::-webkit-scrollbar {
+  width: 5px;
+}
+
+.suggestionDiv::-webkit-scrollbar-track {
+  background: rgba(250, 250, 250, 0.2);
+}
+
+.suggestionDiv::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180.6deg,
+    #224dbd 6.54%,
+    #3069ff 45.43%,
+    #42ccd7 94.5%
+  );
+  border-radius: 100vh;
+  border: none;
+}
