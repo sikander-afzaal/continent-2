@@ -81,7 +81,7 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
         </div>
         {groupSettingsToggle ? (
           //settings part ---------------
-          <div className={styles.settingDiv}>
+          <div className={`${styles.settingDiv} grScrollbar`}>
             <div className={styles.backRow}>
               <svg
                 onClick={() => setGroupSettingsToggle(false)}
@@ -212,7 +212,7 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
             </div>
           </div>
         ) : (
-          <div className={styles.chatMsgs}>
+          <div className={`${styles.chatMsgs} grScrollbar`}>
             {id &&
               DUMMY_MSGS.map((elem, idx) => {
                 return <ChatMsg key={idx + new Date()} {...elem} />;

@@ -26,6 +26,7 @@
   padding: 20px 30px;
   border-radius: 8px;
   background-color: var(--primary-bg);
+  height: 90%;
 }
 .modalHeader {
   display: flex;

@@ -134,7 +134,7 @@ const Message = () => {
           </div>
           <div
             style={{ left: roomToggle ? "0px" : "-600px" }}
-            className={styles.messageRooms}
+            className={`${styles.messageRooms} grScrollbar`}
           >
             <div className={styles.roomHeader}>
               <h2>Messages</h2>
@@ -148,7 +148,7 @@ const Message = () => {
                 Start New Chat
               </button>
             </div>
-            <div className={styles.paddingDiv}>
+            <div className={`${styles.paddingDiv}`}>
               <div className={styles.roomSearch}>
                 <BiSearch />
                 <input type="text" placeholder="Search direct message" />
