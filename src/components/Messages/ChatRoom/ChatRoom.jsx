@@ -75,6 +75,8 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
           onClick={() => {
             if (id == 3 || id == 4) {
               setGroupSettingsToggle(true);
+            } else {
+              setGroupSettingsToggle(false);
             }
           }}
           className={styles.chatHeader}
