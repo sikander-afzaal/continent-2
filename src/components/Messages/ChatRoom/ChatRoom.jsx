@@ -3,6 +3,7 @@ import userImg from "../../../images/user.png";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import GroupPhoto from "../GroupPhoto/GroupPhoto";
+import AddMemberModal from "../AddMemberModal/AddMemberModal";
 
 const ChatRoom = ({ DUMMY_MSGS }) => {
   const DUMMY__MEMBERS = [
@@ -45,9 +46,10 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
   const [groupSettingsToggle, setGroupSettingsToggle] = useState(false);
   const [groupPhotoModalToggle, setGroupPhotoModalToggle] = useState(false);
   const [selectedGroupPhoto, setSelectedGroupPhoto] = useState(false);
-  const [groupDesc, setGroupDesc] = useState("");
-  const [toggleGroupDesc, setToggleGroupDesc] = useState(false);
-  const [editableDesc, setEditableDesc] = useState("");
+  const [toggleAddMemberModal, setToggleAddMemberModal] = useState(false);
+  const [groupDesc, setGroupDesc] = useState(""); //the displayed desc
+  const [toggleGroupDesc, setToggleGroupDesc] = useState(false); //toggles editable desc
+  const [editableDesc, setEditableDesc] = useState(""); //desc in the textbox
   const { id } = useParams();
   return (
     <>
@@ -56,6 +58,9 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
           setModal={setGroupPhotoModalToggle}
           setSelectedGroupPhoto={setSelectedGroupPhoto}
         />
+      )}
+      {toggleAddMemberModal && (
+        <AddMemberModal setModal={setToggleAddMemberModal} />
       )}
       <div className={styles.chatRoom}>
         <div
@@ -173,7 +178,9 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
             <div className={styles.participantsDiv}>
               <div className={styles.partcipantsHead}>
                 <p>Participants</p>
-                <button>Add Member</button>
+                <button onClick={() => setToggleAddMemberModal(true)}>
+                  Add Member
+                </button>
               </div>
               {DUMMY__MEMBERS.map((elem, idx) => {
                 return <Member {...elem} key={idx + new Date() + "mem"} />;
