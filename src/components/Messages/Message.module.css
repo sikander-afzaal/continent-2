@@ -8,6 +8,7 @@
   align-items: flex-start;
   margin-top: 101px;
   position: relative;
+  z-index: 1;
 }
 .messageCont {
   /* max-height: calc(100vh - 151px); */
@@ -236,7 +237,6 @@
 @media screen and (max-width: 991px) {
   .messageWrap {
     margin-top: 165px;
-    z-index: 1;
   }
   .roomChat {
     max-height: 600px;
