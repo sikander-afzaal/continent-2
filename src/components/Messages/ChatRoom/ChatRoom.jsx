@@ -6,7 +6,7 @@ import GroupPhoto from "../GroupPhoto/GroupPhoto";
 import AddMemberModal from "../AddMemberModal/AddMemberModal";
 import Waveform from "../../Waveform/Waveform";
 
-const ChatRoom = ({ isRecording, DUMMY_MSGS }) => {
+const ChatRoom = ({ isRecording, DUMMY_MSGS, setShowInput }) => {
   const DUMMY__MEMBERS = [
     {
       img: userImg,
@@ -68,6 +68,7 @@ const ChatRoom = ({ isRecording, DUMMY_MSGS }) => {
     if (groupSettingsToggle) {
       setting.scrollTo(0, 0);
     }
+    setShowInput(!groupSettingsToggle);
   }, [groupSettingsToggle]);
   return (
     <>

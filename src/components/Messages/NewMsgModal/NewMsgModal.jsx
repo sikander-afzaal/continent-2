@@ -161,7 +161,7 @@ const NewMsgModal = ({ setOpenNewMsgModal }) => {
           className={styles.button}
           onClick={() => setOpenNewMsgModal(false)}
         >
-         {tags.length > 1 ? "Next" : "Create Group"}
+         {tags.length > 1 ? "Create Group" : "Next"}
         </button>
       </div>
     </>

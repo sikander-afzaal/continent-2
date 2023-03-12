@@ -7,7 +7,7 @@
   align-items: start;
   gap: 50px;
   padding-top: 65px;
-  z-index: 2;
+  z-index: 1;
   position: relative;
 }
 .profileHeader::before {

@@ -17,6 +17,7 @@ const Message = () => {
   const { id } = useParams();
   const [openNewMsgModal, setOpenNewMsgModal] = useState(false);
   const [roomToggle, setRoomToggle] = useState(false);
+  const [showInput, setShowInput] = useState(true);
   const [inputMsg, setInputMsg] = useState("");
   const [dummyMsgs, setDummyMsgs] = useState([
     {
@@ -208,7 +209,7 @@ const Message = () => {
           </div>
           <div
             style={{ left: roomToggle ? "0px" : "-600px" }}
-            className={`${styles.messageRooms} grScrollbar`}
+            className={`${styles.messageRooms} `}
           >
             <div className={styles.roomHeader}>
               <h2>Messages</h2>
@@ -227,153 +228,163 @@ const Message = () => {
                 <BiSearch />
                 <input type="text" placeholder="Search direct message" />
               </div>
-
-              <ChatRoomSidebar
-                id={1}
-                setRoomToggle={setRoomToggle}
-                username="Username"
-                latestMsg="Sure! Let me see if there is any other sp"
-                time="2m"
-                unread={2}
-                typing
-              />
-              <ChatRoomSidebar
-                id={2}
-                setRoomToggle={setRoomToggle}
-                username="Username"
-                latestMsg="Sure! Let me see if there is any other sp"
-                time="2m"
-              />
-              <ChatRoomSidebar
-                id={3}
-                setRoomToggle={setRoomToggle}
-                username="Username"
-                latestMsg="Sure! Let me see if there is any other sp"
-                time="2m"
-                group
-              />
-              <ChatRoomSidebar
-                id={4}
-                setRoomToggle={setRoomToggle}
-                username="Username"
-                latestMsg="Sure! Let me see if there is any other sp"
-                time="2m"
-                unread={2}
-                group
-              />
-              <ChatRoomSidebar
-                id={5}
-                setRoomToggle={setRoomToggle}
-                username="Username"
-                latestMsg="Sure! Let me see if there is any other sp"
-                time="2m"
-                unread={2}
-                typing
-              />
-              <ChatRoomSidebar
-                id={6}
-                setRoomToggle={setRoomToggle}
-                username="Username"
-                latestMsg="Sure! Let me see if there is any other sp"
-                time="2m"
-              />
-              <ChatRoomSidebar
-                id={7}
-                setRoomToggle={setRoomToggle}
-                username="Username"
-                latestMsg="Sure! Let me see if there is any other sp"
-                time="2m"
-              />
-              <ChatRoomSidebar
-                id={8}
-                setRoomToggle={setRoomToggle}
-                username="Username"
-                latestMsg="Sure! Let me see if there is any other sp"
-                time="2m"
-                unread={2}
-              />
-              <ChatRoomSidebar
-                id={9}
-                setRoomToggle={setRoomToggle}
-                username="Username"
-                latestMsg="Sure! Let me see if there is any other sp"
-                time="2m"
-                unread={2}
-                typing
-              />
-              <ChatRoomSidebar
-                id={10}
-                setRoomToggle={setRoomToggle}
-                username="Username"
-                latestMsg="Sure! Let me see if there is any other sp"
-                time="2m"
-              />
-              <ChatRoomSidebar
-                id={11}
-                setRoomToggle={setRoomToggle}
-                username="Username"
-                latestMsg="Sure! Let me see if there is any other sp"
-                time="2m"
-              />
-              <ChatRoomSidebar
-                id={12}
-                setRoomToggle={setRoomToggle}
-                username="Username"
-                latestMsg="Sure! Let me see if there is any other sp"
-                time="2m"
-                unread={2}
-              />
+              <div className={`grScrollbar ${styles.scrollDiv}`}>
+                <ChatRoomSidebar
+                  id={1}
+                  setRoomToggle={setRoomToggle}
+                  username="Username"
+                  latestMsg="Sure! Let me see if there is any other sp"
+                  time="2m"
+                  unread={2}
+                  typing
+                />
+                <ChatRoomSidebar
+                  id={2}
+                  setRoomToggle={setRoomToggle}
+                  username="Username"
+                  latestMsg="Sure! Let me see if there is any other sp"
+                  time="2m"
+                />
+                <ChatRoomSidebar
+                  id={3}
+                  setRoomToggle={setRoomToggle}
+                  username="Username"
+                  latestMsg="Sure! Let me see if there is any other sp"
+                  time="2m"
+                  group
+                />
+                <ChatRoomSidebar
+                  id={4}
+                  setRoomToggle={setRoomToggle}
+                  username="Username"
+                  latestMsg="Sure! Let me see if there is any other sp"
+                  time="2m"
+                  unread={2}
+                  group
+                />
+                <ChatRoomSidebar
+                  id={5}
+                  setRoomToggle={setRoomToggle}
+                  username="Username"
+                  latestMsg="Sure! Let me see if there is any other sp"
+                  time="2m"
+                  unread={2}
+                  typing
+                />
+                <ChatRoomSidebar
+                  id={6}
+                  setRoomToggle={setRoomToggle}
+                  username="Username"
+                  latestMsg="Sure! Let me see if there is any other sp"
+                  time="2m"
+                />
+                <ChatRoomSidebar
+                  id={7}
+                  setRoomToggle={setRoomToggle}
+                  username="Username"
+                  latestMsg="Sure! Let me see if there is any other sp"
+                  time="2m"
+                />
+                <ChatRoomSidebar
+                  id={8}
+                  setRoomToggle={setRoomToggle}
+                  username="Username"
+                  latestMsg="Sure! Let me see if there is any other sp"
+                  time="2m"
+                  unread={2}
+                />
+                <ChatRoomSidebar
+                  id={9}
+                  setRoomToggle={setRoomToggle}
+                  username="Username"
+                  latestMsg="Sure! Let me see if there is any other sp"
+                  time="2m"
+                  unread={2}
+                  typing
+                />
+                <ChatRoomSidebar
+                  id={10}
+                  setRoomToggle={setRoomToggle}
+                  username="Username"
+                  latestMsg="Sure! Let me see if there is any other sp"
+                  time="2m"
+                />
+                <ChatRoomSidebar
+                  id={11}
+                  setRoomToggle={setRoomToggle}
+                  username="Username"
+                  latestMsg="Sure! Let me see if there is any other sp"
+                  time="2m"
+                />
+                <ChatRoomSidebar
+                  id={12}
+                  setRoomToggle={setRoomToggle}
+                  username="Username"
+                  latestMsg="Sure! Let me see if there is any other sp"
+                  time="2m"
+                  unread={2}
+                />
+              </div>
             </div>
           </div>
           <div className={styles.roomChat}>
-            <div className={styles.chatPart}>
-              <ChatRoom DUMMY_MSGS={dummyMsgs} isRecording={isRecording} />
-            </div>
-            <form onSubmit={addMsg} className={styles.inputDiv}>
-              <input
-                value={inputMsg}
-                onChange={(e) => setInputMsg(e.target.value)}
-                type="text"
-                placeholder="Write message..."
+            <div
+              style={{ height: showInput ? "calc(100% - 40px)" : "100%" }}
+              className={styles.chatPart}
+            >
+              <ChatRoom
+                setShowInput={setShowInput}
+                DUMMY_MSGS={dummyMsgs}
+                isRecording={isRecording}
               />
-              <div className={styles.rightInput}>
-                <div className={styles.imgInput}>
-                  <input
-                    onChange={addImageToChat}
-                    style={{ display: "none" }}
-                    type="file"
-                    id="uploadImg"
-                  />
-                  <label htmlFor="uploadImg">
-                    <img src={imageInput} alt="" />
-                  </label>
+            </div>
+            {showInput && (
+              <form onSubmit={addMsg} className={styles.inputDiv}>
+                <input
+                  value={inputMsg}
+                  onChange={(e) => setInputMsg(e.target.value)}
+                  type="text"
+                  placeholder="Write message..."
+                />
+                <div className={styles.rightInput}>
+                  <div className={styles.imgInput}>
+                    <input
+                      onChange={addImageToChat}
+                      style={{ display: "none" }}
+                      type="file"
+                      id="uploadImg"
+                    />
+                    <label htmlFor="uploadImg">
+                      <img src={imageInput} alt="" />
+                    </label>
+                  </div>
+                  {isRecording ? (
+                    <p
+                      style={{
+                        color: "white",
+                        fontSize: "16px",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => {
+                        addNewVoiceNote();
+                        // stopRecording();
+                      }}
+                    >
+                      Stop
+                    </p>
+                  ) : (
+                    <img
+                      onClick={() => {
+                        startRecording();
+                      }}
+                      src={micImage}
+                      alt=""
+                    />
+                  )}
                 </div>
-                {isRecording ? (
-                  <p
-                    style={{
-                      color: "white",
-                      fontSize: "16px",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => {
-                      addNewVoiceNote();
-                      // stopRecording();
-                    }}
-                  >
-                    Stop
-                  </p>
-                ) : (
-                  <img
-                    onClick={() => {
-                      startRecording();
-                    }}
-                    src={micImage}
-                    alt=""
-                  />
-                )}
-              </div>
-              <button type="submit"></button>
-            </form>
+                <button type="submit"></button>
+              </form>
+            )}
           </div>
         </div>
       </div>
