@@ -10,6 +10,7 @@ const ChatRoomSidebar = ({
   time,
   setRoomToggle,
   id,
+  group,
 }) => {
   return (
     <NavLink
@@ -22,10 +23,19 @@ const ChatRoomSidebar = ({
       to={`/messages/${id}`}
       className={styles.chatRoom}
     >
-      <img src={img} alt="" />
+      {group ? (
+        <div className={styles.groupImages}>
+          <img src={img} alt="" />
+          <img src={img} alt="" />
+          <img src={img} alt="" />
+        </div>
+      ) : (
+        <img src={img} alt="" />
+      )}
+
       <div className={styles.rightRoom}>
         <div className={styles.roomDetails}>
-          <h4>{username}</h4>
+          <h4>{group ? "Group Name" : username}</h4>
           {typing ? (
             <p>
               <span>Typing...</span>

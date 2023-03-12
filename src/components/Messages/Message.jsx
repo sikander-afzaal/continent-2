@@ -4,10 +4,11 @@ import ChatRoomSidebar from "./ChatRoomSidebar/ChatRoomSidebar";
 import styles from "./Message.module.css";
 import imageInput from "../../images/image-add.png";
 import micImage from "../../images/mic.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ChatRoom from "./ChatRoom/ChatRoom";
 import NewMsgModal from "./NewMsgModal/NewMsgModal";
+import testImg from "../../images/nftposts/nft1.png";
 
 const Message = () => {
   const { id } = useParams();
@@ -83,9 +84,35 @@ const Message = () => {
       msgs: [
         { msg: "Hello", time: "13:45" },
         { msg: "How are you", time: "13:45" },
+        { msg: "", time: "13:45", img: testImg },
       ],
     },
   ]);
+
+  const addImageToChat = (e) => {
+    const imgUrl = URL.createObjectURL(e.target.files[0]);
+    if (!e.target.files[0].type.includes("image")) return;
+    const copy = [...dummyMsgs];
+    let yourMsg = true;
+    copy.forEach((elem, idx) => {
+      if (idx === copy.length - 1) {
+        if (elem.yourMsg) {
+          elem.msgs.push({ msg: "", time: "13:45", img: imgUrl });
+        } else {
+          yourMsg = false;
+        }
+      }
+    });
+    if (yourMsg) {
+      setDummyMsgs(copy);
+    } else {
+      setDummyMsgs((prev) => [
+        ...prev,
+        { yourMsg: true, msgs: [{ msg: "", time: "13:45", img: imgUrl }] },
+      ]);
+    }
+  };
+
   const addMsg = (e) => {
     e.preventDefault();
     if (!inputMsg) return;
@@ -111,6 +138,12 @@ const Message = () => {
     }
     setInputMsg("");
   };
+  // scrolling to the bottom of the messages everytime a new message is typed
+  useEffect(() => {
+    const chatRoom = document.querySelector(".chatMsgs");
+    chatRoom.scrollTop = chatRoom.scrollHeight;
+  }, [dummyMsgs]);
+
   return (
     <>
       {openNewMsgModal && (
@@ -153,6 +186,7 @@ const Message = () => {
                 <BiSearch />
                 <input type="text" placeholder="Search direct message" />
               </div>
+
               <ChatRoomSidebar
                 id={1}
                 setRoomToggle={setRoomToggle}
@@ -175,6 +209,7 @@ const Message = () => {
                 username="Username"
                 latestMsg="Sure! Let me see if there is any other sp"
                 time="2m"
+                group
               />
               <ChatRoomSidebar
                 id={4}
@@ -183,6 +218,7 @@ const Message = () => {
                 latestMsg="Sure! Let me see if there is any other sp"
                 time="2m"
                 unread={2}
+                group
               />
               <ChatRoomSidebar
                 id={5}
@@ -260,7 +296,17 @@ const Message = () => {
                 placeholder="Write message..."
               />
               <div className={styles.rightInput}>
-                <img src={imageInput} alt="" />
+                <div className={styles.imgInput}>
+                  <input
+                    onChange={addImageToChat}
+                    style={{ display: "none" }}
+                    type="file"
+                    id="uploadImg"
+                  />
+                  <label htmlFor="uploadImg">
+                    <img src={imageInput} alt="" />
+                  </label>
+                </div>
                 <img src={micImage} alt="" />
               </div>
               <button type="submit"></button>

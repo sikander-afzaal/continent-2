@@ -54,6 +54,7 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
   const [deleteGroupModal, setDeleteGroupModal] = useState(false);
   const [removeMemberModal, setRemoveMemberModal] = useState(false);
   const { id } = useParams();
+
   return (
     <>
       {exitGroupModal && <ExitGroup setModal={setExitGroupModal} />}
@@ -73,9 +74,13 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
           onClick={() => setGroupSettingsToggle(true)}
           className={styles.chatHeader}
         >
-          <img src={userImg} alt="" />
+          {selectedGroupPhoto?.img ? (
+            <img src={selectedGroupPhoto.img} alt="" />
+          ) : (
+            <div className={styles.placeHolderImg}></div>
+          )}
           <div className={styles.rightHeader}>
-            <h3>juanbautista.eth</h3>
+            <h3>{id == 3 || id == 4 ? "Group Name" : "juanbautista.eth"}</h3>
             <p>Active 28m ago</p>
           </div>
         </div>
@@ -190,29 +195,39 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
                   Add Member
                 </button>
               </div>
-              {DUMMY__MEMBERS.map((elem, idx) => {
-                return (
-                  <Member
-                    removeMemberModal={setRemoveMemberModal}
-                    {...elem}
-                    key={idx + new Date() + "mem"}
-                  />
-                );
-              })}
+              {id == 4 || id == 3 ? (
+                DUMMY__MEMBERS.map((elem, idx) => {
+                  return (
+                    <Member
+                      removeMemberModal={setRemoveMemberModal}
+                      {...elem}
+                      key={idx + new Date() + "mem"}
+                    />
+                  );
+                })
+              ) : (
+                <Member img={userImg} name="Username" />
+              )}
             </div>
-            <div className={styles.deleteBtn}>
-              <button onClick={() => setDeleteGroupModal(true)}>
-                Delete Group
-              </button>
-            </div>
-            <div className={styles.deleteBtn}>
-              <button onClick={() => setExitGroupModal(true)}>
-                Exit Group
-              </button>
-            </div>
+            {id == 3 || id == 4 ? (
+              <>
+                <div className={styles.deleteBtn}>
+                  <button onClick={() => setDeleteGroupModal(true)}>
+                    Delete Group
+                  </button>
+                </div>
+                <div className={styles.deleteBtn}>
+                  <button onClick={() => setExitGroupModal(true)}>
+                    Exit Group
+                  </button>
+                </div>
+              </>
+            ) : (
+              ""
+            )}
           </div>
         ) : (
-          <div className={`${styles.chatMsgs} grScrollbar`}>
+          <div className={`${styles.chatMsgs} chatMsgs grScrollbar`}>
             {id &&
               DUMMY_MSGS.map((elem, idx) => {
                 return <ChatMsg key={idx + new Date()} {...elem} />;
@@ -230,12 +245,21 @@ const ChatMsg = ({ msgs, yourMsg }) => {
   return (
     <div className={`${yourMsg ? styles.sentMsg : styles.recievedMsg}`}>
       {msgs.map((elem, idx) => {
-        return (
-          <div key={elem + idx + new Date()}>
-            <p>{elem.msg}</p>
-            <span>{elem.time}</span>
-          </div>
-        );
+        if (elem.img) {
+          return (
+            <div className={styles.chatImgDiv} key={elem + idx + new Date()}>
+              <img src={elem.img} className={styles.chatImg} alt="" />
+              <span>{elem.time}</span>
+            </div>
+          );
+        } else if (elem.msg) {
+          return (
+            <div key={elem + idx + new Date()} className={styles.chatMsgDiv}>
+              <p>{elem.msg}</p>
+              <span>{elem.time}</span>
+            </div>
+          );
+        }
       })}
     </div>
   );
