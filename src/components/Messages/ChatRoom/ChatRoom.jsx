@@ -70,8 +70,13 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
         <AddMemberModal setModal={setToggleAddMemberModal} />
       )}
       <div className={styles.chatRoom}>
+        {/* //chat header --------------------- */}
         <div
-          onClick={() => setGroupSettingsToggle(true)}
+          onClick={() => {
+            if (id == 3 || id == 4) {
+              setGroupSettingsToggle(true);
+            }
+          }}
           className={styles.chatHeader}
         >
           {selectedGroupPhoto?.img ? (
@@ -84,6 +89,7 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
             <p>Active 28m ago</p>
           </div>
         </div>
+        {/* //chat header end --------------------- */}
         {groupSettingsToggle ? (
           //settings part ---------------
           <div className={`${styles.settingDiv} grScrollbar`}>
@@ -195,36 +201,27 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
                   Add Member
                 </button>
               </div>
-              {id == 4 || id == 3 ? (
-                DUMMY__MEMBERS.map((elem, idx) => {
-                  return (
-                    <Member
-                      removeMemberModal={setRemoveMemberModal}
-                      {...elem}
-                      key={idx + new Date() + "mem"}
-                    />
-                  );
-                })
-              ) : (
-                <Member img={userImg} name="Username" />
-              )}
+              {DUMMY__MEMBERS.map((elem, idx) => {
+                return (
+                  <Member
+                    removeMemberModal={setRemoveMemberModal}
+                    {...elem}
+                    key={idx + new Date() + "mem"}
+                  />
+                );
+              })}
             </div>
-            {id == 3 || id == 4 ? (
-              <>
-                <div className={styles.deleteBtn}>
-                  <button onClick={() => setDeleteGroupModal(true)}>
-                    Delete Group
-                  </button>
-                </div>
-                <div className={styles.deleteBtn}>
-                  <button onClick={() => setExitGroupModal(true)}>
-                    Exit Group
-                  </button>
-                </div>
-              </>
-            ) : (
-              ""
-            )}
+
+            <div className={styles.deleteBtn}>
+              <button onClick={() => setDeleteGroupModal(true)}>
+                Delete Group
+              </button>
+            </div>
+            <div className={styles.deleteBtn}>
+              <button onClick={() => setExitGroupModal(true)}>
+                Exit Group
+              </button>
+            </div>
           </div>
         ) : (
           <div className={`${styles.chatMsgs} chatMsgs grScrollbar`}>
