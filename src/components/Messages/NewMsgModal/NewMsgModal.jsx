@@ -112,7 +112,7 @@ const NewMsgModal = ({ setOpenNewMsgModal }) => {
             />
           </div>
         </div>
-        <div className={styles.suggestionDiv}>
+        <div className={`${styles.suggestionDiv} grScrollbar`}>
           <h3>Suggestions</h3>
           {dummyPeople
             .filter((elem) => elem.name.includes(searchedPerson))
@@ -152,7 +152,12 @@ const NewMsgModal = ({ setOpenNewMsgModal }) => {
               );
             })}
         </div>
-        <button className={styles.button}>Next</button>
+        <button
+          className={styles.button}
+          onClick={() => setOpenNewMsgModal(false)}
+        >
+          Create Group
+        </button>
       </div>
     </>
   );

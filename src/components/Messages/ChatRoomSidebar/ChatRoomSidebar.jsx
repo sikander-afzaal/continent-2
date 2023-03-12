@@ -1,6 +1,6 @@
 import styles from "./ChatRoomSidebar.module.css";
 import userImg from "../../../images/user.png";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const ChatRoomSidebar = ({
   typing,
   latestMsg = "",
@@ -12,7 +12,12 @@ const ChatRoomSidebar = ({
   id,
 }) => {
   return (
-    <Link
+    <NavLink
+      style={({ isActive, isPending }) => {
+        return {
+          backgroundColor: isActive ? "#D9D9D933" : "",
+        };
+      }}
       onClick={() => setRoomToggle(false)}
       to={`/messages/${id}`}
       className={styles.chatRoom}
@@ -38,7 +43,7 @@ const ChatRoomSidebar = ({
         </div>
         {unread > 0 && <h5 className={styles.unread}>{unread}</h5>}
       </div>
-    </Link>
+    </NavLink>
   );
 };
 
