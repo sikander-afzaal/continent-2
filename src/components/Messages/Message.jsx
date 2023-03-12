@@ -141,8 +141,10 @@ const Message = () => {
   // scrolling to the bottom of the messages everytime a new message is typed
   useEffect(() => {
     const chatRoom = document.querySelector(".chatMsgs");
-    chatRoom.scrollTop = chatRoom.scrollHeight;
-  }, [dummyMsgs]);
+    if (chatRoom) {
+      chatRoom.scrollTop = chatRoom.scrollHeight;
+    }
+  }, [dummyMsgs, id]);
 
   return (
     <>

@@ -61,7 +61,13 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
       setGroupSettingsToggle(false);
     }
   }, [id]);
-
+  // scrolling to the bottom of the messages everytime a new message is typed
+  useEffect(() => {
+    const setting = document.querySelector(".settings");
+    if (groupSettingsToggle) {
+      setting.scrollTo(0, 0);
+    }
+  }, [groupSettingsToggle]);
   return (
     <>
       {exitGroupModal && <ExitGroup setModal={setExitGroupModal} />}
@@ -99,7 +105,7 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
         {/* //chat header end --------------------- */}
         {groupSettingsToggle ? (
           //settings part ---------------
-          <div className={`${styles.settingDiv} grScrollbar`}>
+          <div className={`${styles.settingDiv} grScrollbar settings`}>
             <div className={styles.backRow}>
               <svg
                 onClick={() => setGroupSettingsToggle(false)}
