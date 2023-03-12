@@ -1,0 +1,21 @@
+.waveform {
+  width: 100%;
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.waveform button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  margin-top: 4px;
+}
+.waveform button svg {
+  font-size: 30px;
+  fill: white;
+}
+.mainWave {
+  width: 180px;
+}

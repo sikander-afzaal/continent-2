@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import GroupPhoto from "../GroupPhoto/GroupPhoto";
 import AddMemberModal from "../AddMemberModal/AddMemberModal";
+import Waveform from "../../Waveform/Waveform";
 
 const ChatRoom = ({ DUMMY_MSGS }) => {
   const DUMMY__MEMBERS = [
@@ -237,6 +238,7 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
             </div>
           </div>
         ) : (
+          //settings end --------------------
           <div className={`${styles.chatMsgs} chatMsgs grScrollbar`}>
             {id &&
               DUMMY_MSGS.map((elem, idx) => {
@@ -266,6 +268,13 @@ const ChatMsg = ({ msgs, yourMsg }) => {
           return (
             <div key={elem + idx + new Date()} className={styles.chatMsgDiv}>
               <p>{elem.msg}</p>
+              <span>{elem.time}</span>
+            </div>
+          );
+        } else if (elem.audio) {
+          return (
+            <div key={elem + idx + new Date()} className={styles.chatMsgDiv}>
+              <Waveform audio={elem.audio} />
               <span>{elem.time}</span>
             </div>
           );

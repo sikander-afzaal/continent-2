@@ -9,9 +9,14 @@ import { useParams } from "react-router-dom";
 import ChatRoom from "./ChatRoom/ChatRoom";
 import NewMsgModal from "./NewMsgModal/NewMsgModal";
 import testImg from "../../images/nftposts/nft1.png";
+import useRecorder from "./useRecorder";
+import { useAudioRecorder } from "react-audio-voice-recorder";
 
 const Message = () => {
+  const { startRecording, stopRecording, recordingBlob, isRecording } =
+    useAudioRecorder();
   const { id } = useParams();
+  // let [audioURL, isRecording, startRecording, stopRecording] = useRecorder();
   const [openNewMsgModal, setOpenNewMsgModal] = useState(false);
   const [roomToggle, setRoomToggle] = useState(false);
   const [inputMsg, setInputMsg] = useState("");
@@ -89,6 +94,33 @@ const Message = () => {
     },
   ]);
 
+  const addNewVoiceNote = () => {
+    stopRecording();
+    if (!recordingBlob) return;
+    const audioURL = URL.createObjectURL(recordingBlob);
+    const copy = [...dummyMsgs];
+    let yourMsg = true;
+    copy.forEach((elem, idx) => {
+      if (idx === copy.length - 1) {
+        if (elem.yourMsg) {
+          elem.msgs.push({ msg: "", time: "13:45", audio: audioURL });
+        } else {
+          yourMsg = false;
+        }
+      }
+    });
+    if (yourMsg) {
+      setDummyMsgs(copy);
+    } else {
+      setDummyMsgs((prev) => [
+        ...prev,
+        {
+          yourMsg: true,
+          msgs: [{ msg: "", time: "13:45", audio: audioURL }],
+        },
+      ]);
+    }
+  };
   const addImageToChat = (e) => {
     const imgUrl = URL.createObjectURL(e.target.files[0]);
     if (!e.target.files[0].type.includes("image")) return;
@@ -309,7 +341,28 @@ const Message = () => {
                     <img src={imageInput} alt="" />
                   </label>
                 </div>
-                <img src={micImage} alt="" />
+                {isRecording ? (
+                  <p
+                    style={{
+                      color: "white",
+                      fontSize: "16px",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => {
+                      addNewVoiceNote();
+                    }}
+                  >
+                    Stop
+                  </p>
+                ) : (
+                  <img
+                    onClick={() => {
+                      startRecording();
+                    }}
+                    src={micImage}
+                    alt=""
+                  />
+                )}
               </div>
               <button type="submit"></button>
             </form>
