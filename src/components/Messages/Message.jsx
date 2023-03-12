@@ -4,19 +4,17 @@ import ChatRoomSidebar from "./ChatRoomSidebar/ChatRoomSidebar";
 import styles from "./Message.module.css";
 import imageInput from "../../images/image-add.png";
 import micImage from "../../images/mic.png";
-import { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import ChatRoom from "./ChatRoom/ChatRoom";
 import NewMsgModal from "./NewMsgModal/NewMsgModal";
 import testImg from "../../images/nftposts/nft1.png";
-import useRecorder from "./useRecorder";
 import { useAudioRecorder } from "react-audio-voice-recorder";
 
 const Message = () => {
   const { startRecording, stopRecording, recordingBlob, isRecording } =
     useAudioRecorder();
   const { id } = useParams();
-  // let [audioURL, isRecording, startRecording, stopRecording] = useRecorder();
   const [openNewMsgModal, setOpenNewMsgModal] = useState(false);
   const [roomToggle, setRoomToggle] = useState(false);
   const [inputMsg, setInputMsg] = useState("");
@@ -93,34 +91,43 @@ const Message = () => {
       ],
     },
   ]);
+  const recordingRef = useRef();
+
+  useEffect(() => {
+    if (recordingBlob) recordingRef.current = recordingBlob;
+  }, [recordingBlob]);
 
   const addNewVoiceNote = () => {
     stopRecording();
-    if (!recordingBlob) return;
-    const audioURL = URL.createObjectURL(recordingBlob);
-    const copy = [...dummyMsgs];
-    let yourMsg = true;
-    copy.forEach((elem, idx) => {
-      if (idx === copy.length - 1) {
-        if (elem.yourMsg) {
-          elem.msgs.push({ msg: "", time: "13:45", audio: audioURL });
-        } else {
-          yourMsg = false;
+    setTimeout(() => {
+      const recordingBlob = recordingRef.current;
+      if (!recordingBlob) return;
+      const audioURL = URL.createObjectURL(recordingBlob);
+      const copy = [...dummyMsgs];
+      let yourMsg = true;
+      copy.forEach((elem, idx) => {
+        if (idx === copy.length - 1) {
+          if (elem.yourMsg) {
+            elem.msgs.push({ msg: "", time: "13:45", audio: audioURL });
+          } else {
+            yourMsg = false;
+          }
         }
+      });
+      if (yourMsg) {
+        setDummyMsgs(copy);
+      } else {
+        setDummyMsgs((prev) => [
+          ...prev,
+          {
+            yourMsg: true,
+            msgs: [{ msg: "", time: "13:45", audio: audioURL }],
+          },
+        ]);
       }
-    });
-    if (yourMsg) {
-      setDummyMsgs(copy);
-    } else {
-      setDummyMsgs((prev) => [
-        ...prev,
-        {
-          yourMsg: true,
-          msgs: [{ msg: "", time: "13:45", audio: audioURL }],
-        },
-      ]);
-    }
+    }, 100);
   };
+
   const addImageToChat = (e) => {
     const imgUrl = URL.createObjectURL(e.target.files[0]);
     if (!e.target.files[0].type.includes("image")) return;
@@ -320,7 +327,7 @@ const Message = () => {
           </div>
           <div className={styles.roomChat}>
             <div className={styles.chatPart}>
-              <ChatRoom DUMMY_MSGS={dummyMsgs} />
+              <ChatRoom DUMMY_MSGS={dummyMsgs} isRecording={isRecording} />
             </div>
             <form onSubmit={addMsg} className={styles.inputDiv}>
               <input
@@ -350,6 +357,7 @@ const Message = () => {
                     }}
                     onClick={() => {
                       addNewVoiceNote();
+                      // stopRecording();
                     }}
                   >
                     Stop

@@ -1,12 +1,12 @@
 import styles from "./ChatRoom.module.css";
 import userImg from "../../../images/user.png";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import GroupPhoto from "../GroupPhoto/GroupPhoto";
 import AddMemberModal from "../AddMemberModal/AddMemberModal";
 import Waveform from "../../Waveform/Waveform";
 
-const ChatRoom = ({ DUMMY_MSGS }) => {
+const ChatRoom = ({ isRecording, DUMMY_MSGS }) => {
   const DUMMY__MEMBERS = [
     {
       img: userImg,
@@ -251,7 +251,9 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
   );
 };
 
-export default ChatRoom;
+export default React.memo(ChatRoom, (prevProps, nextProps) => {
+  return nextProps.isRecording;
+});
 
 const ChatMsg = ({ msgs, yourMsg }) => {
   return (
