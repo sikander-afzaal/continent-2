@@ -175,28 +175,17 @@
 .overlay {
   display: none;
 }
-@media screen and (max-width: 1120px) {
-  .messageCont {
-    grid-template-columns: 350px 1fr;
-  }
+
+@media screen and (max-width: 1200px) {
   .roomHeader h2 {
     font-size: 20px;
   }
+
   .roomHeader,
   .inputDiv,
   .paddingDiv {
     padding-inline: 20px;
   }
-}
-@media screen and (max-width: 991px) {
-  .messageWrap {
-    margin-top: 165px;
-  }
-  .messageCont {
-    height: calc(100vh - 180px);
-  }
-}
-@media screen and (max-width: 814px) {
   .mobToggle {
     display: inline-block;
     width: max-content;
@@ -208,7 +197,7 @@
   }
   .messageWrap {
     padding-inline: 20px;
-    margin-top: 165px;
+    margin-top: 101px;
   }
   .messageCont {
     max-width: 100%;
@@ -241,6 +230,14 @@
   }
   .roomChat {
     max-height: 100%;
+    max-height: 650px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .messageWrap {
+    margin-top: 165px;
+  }
+  .roomChat {
     max-height: 600px;
   }
 }

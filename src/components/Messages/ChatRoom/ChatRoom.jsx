@@ -5,43 +5,38 @@ import React, { useEffect, useState } from "react";
 import GroupPhoto from "../GroupPhoto/GroupPhoto";
 import AddMemberModal from "../AddMemberModal/AddMemberModal";
 import Waveform from "../../Waveform/Waveform";
+import testImg from "../../../images/nftposts/nft1.png";
 
 const ChatRoom = ({ isRecording, DUMMY_MSGS, setShowInput }) => {
   const DUMMY__MEMBERS = [
     {
       img: userImg,
       name: "Member1",
-      admin: true,
+      mainAdmin: true,
     },
     {
       img: userImg,
       name: "Member1",
-      admin: false,
     },
     {
       img: userImg,
       name: "Member1",
-      admin: false,
     },
     {
       img: userImg,
       name: "Member1",
-      admin: false,
     },
     {
       img: userImg,
       name: "Member1",
-      admin: false,
     },
     {
       img: userImg,
       name: "Member1",
-      admin: false,
     },
     {
       img: userImg,
       name: "Member1",
-      admin: false,
     },
   ];
   const [groupSettingsToggle, setGroupSettingsToggle] = useState(false);
@@ -54,12 +49,22 @@ const ChatRoom = ({ isRecording, DUMMY_MSGS, setShowInput }) => {
   const [exitGroupModal, setExitGroupModal] = useState(false);
   const [deleteGroupModal, setDeleteGroupModal] = useState(false);
   const [removeMemberModal, setRemoveMemberModal] = useState(false);
+  const [adminUser, setAdminUser] = useState();
   const { id } = useParams();
   useEffect(() => {
     if (id == 3 || id == 4) {
-      return;
     } else {
       setGroupSettingsToggle(false);
+    }
+    if (id == 3) {
+      setAdminUser(true);
+      setGroupDesc("");
+    } else {
+      setAdminUser(false);
+      setGroupDesc(
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro laudantium eaque error odio fugit. Iure qui distinctio molestias? Voluptates, ea!"
+      );
+      setSelectedGroupPhoto({ img: testImg });
     }
   }, [id]);
   // scrolling to the bottom of the messages everytime a new message is typed
@@ -126,7 +131,7 @@ const ChatRoom = ({ isRecording, DUMMY_MSGS, setShowInput }) => {
               <button>Save</button>
             </div>
             <div className={styles.centerDetails}>
-              <p>Group Name</p>
+              <p>{adminUser ? "GroupName" : "Group Name"}</p>
               <div className={styles.groupPhotoDiv}>
                 {selectedGroupPhoto?.img ? (
                   <img
@@ -137,11 +142,15 @@ const ChatRoom = ({ isRecording, DUMMY_MSGS, setShowInput }) => {
                 ) : (
                   <div className={styles.groupPhoto}></div>
                 )}
-                <button onClick={() => setGroupPhotoModalToggle(true)}>
-                  {selectedGroupPhoto?.img
-                    ? "Change Group Photo"
-                    : "Add Group Photo"}
-                </button>
+                {adminUser ? (
+                  <button onClick={() => setGroupPhotoModalToggle(true)}>
+                    {selectedGroupPhoto?.img
+                      ? "Change Group Photo"
+                      : "Add Group Photo"}
+                  </button>
+                ) : (
+                  ""
+                )}
               </div>
               {groupDesc ? (
                 <div className={styles.descDisplayed}>
@@ -153,20 +162,24 @@ const ChatRoom = ({ isRecording, DUMMY_MSGS, setShowInput }) => {
                   ) : (
                     <p>{groupDesc}</p>
                   )}
-                  <button
-                    onClick={() => {
-                      if (toggleGroupDesc) {
-                        setToggleGroupDesc(false);
-                        setGroupDesc(editableDesc);
-                        setEditableDesc("");
-                      } else {
-                        setEditableDesc(groupDesc);
-                        setToggleGroupDesc(true);
-                      }
-                    }}
-                  >
-                    {toggleGroupDesc ? "Update" : "Edit"} Group Description
-                  </button>
+                  {adminUser ? (
+                    <button
+                      onClick={() => {
+                        if (toggleGroupDesc) {
+                          setToggleGroupDesc(false);
+                          setGroupDesc(editableDesc);
+                          setEditableDesc("");
+                        } else {
+                          setEditableDesc(groupDesc);
+                          setToggleGroupDesc(true);
+                        }
+                      }}
+                    >
+                      {toggleGroupDesc ? "Update" : "Edit"} Group Description
+                    </button>
+                  ) : (
+                    ""
+                  )}
                 </div>
               ) : (
                 <>
@@ -212,13 +225,16 @@ const ChatRoom = ({ isRecording, DUMMY_MSGS, setShowInput }) => {
             <div className={styles.participantsDiv}>
               <div className={styles.partcipantsHead}>
                 <p>Participants</p>
-                <button onClick={() => setToggleAddMemberModal(true)}>
-                  Add Member
-                </button>
+                {adminUser && (
+                  <button onClick={() => setToggleAddMemberModal(true)}>
+                    Add Member
+                  </button>
+                )}
               </div>
               {DUMMY__MEMBERS.map((elem, idx) => {
                 return (
                   <Member
+                    admin={adminUser}
                     removeMemberModal={setRemoveMemberModal}
                     {...elem}
                     key={idx + new Date() + "mem"}
@@ -228,9 +244,11 @@ const ChatRoom = ({ isRecording, DUMMY_MSGS, setShowInput }) => {
             </div>
 
             <div className={styles.deleteBtn}>
-              <button onClick={() => setDeleteGroupModal(true)}>
-                Delete Group
-              </button>
+              {adminUser && (
+                <button onClick={() => setDeleteGroupModal(true)}>
+                  Delete Group
+                </button>
+              )}
             </div>
             <div className={styles.deleteBtn}>
               <button onClick={() => setExitGroupModal(true)}>
@@ -289,16 +307,16 @@ const ChatMsg = ({ msgs, yourMsg }) => {
   );
 };
 
-const Member = ({ img, name, admin, removeMemberModal }) => {
+const Member = ({ img, name, admin, removeMemberModal, mainAdmin }) => {
   return (
     <div className={styles.partcipant}>
       <div>
         <img src={img} alt="" />
         <p>
-          {name} {admin && "(admin)"}
+          {name} {mainAdmin && "(admin)"}
         </p>
       </div>
-      <button onClick={() => removeMemberModal(true)}>Remove</button>
+      {admin && <button onClick={() => removeMemberModal(true)}>Remove</button>}
     </div>
   );
 };
