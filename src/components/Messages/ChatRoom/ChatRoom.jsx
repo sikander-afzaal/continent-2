@@ -50,9 +50,15 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
   const [groupDesc, setGroupDesc] = useState(""); //the displayed desc
   const [toggleGroupDesc, setToggleGroupDesc] = useState(false); //toggles editable desc
   const [editableDesc, setEditableDesc] = useState(""); //desc in the textbox
+  const [exitGroupModal, setExitGroupModal] = useState(false);
+  const [deleteGroupModal, setDeleteGroupModal] = useState(false);
+  const [removeMemberModal, setRemoveMemberModal] = useState(false);
   const { id } = useParams();
   return (
     <>
+      {exitGroupModal && <ExitGroup setModal={setExitGroupModal} />}
+      {deleteGroupModal && <DeleteGroup setModal={setDeleteGroupModal} />}
+      {removeMemberModal && <RemoveMember setModal={setRemoveMemberModal} />}
       {groupPhotoModalToggle && (
         <GroupPhoto
           setModal={setGroupPhotoModalToggle}
@@ -74,6 +80,7 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
           </div>
         </div>
         {groupSettingsToggle ? (
+          //settings part ---------------
           <div className={styles.settingDiv}>
             <div className={styles.backRow}>
               <svg
@@ -99,6 +106,7 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
                   <img
                     className={styles.groupPhoto}
                     src={selectedGroupPhoto.img}
+                    alt="group"
                   />
                 ) : (
                   <div className={styles.groupPhoto}></div>
@@ -183,14 +191,24 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
                 </button>
               </div>
               {DUMMY__MEMBERS.map((elem, idx) => {
-                return <Member {...elem} key={idx + new Date() + "mem"} />;
+                return (
+                  <Member
+                    removeMemberModal={setRemoveMemberModal}
+                    {...elem}
+                    key={idx + new Date() + "mem"}
+                  />
+                );
               })}
             </div>
             <div className={styles.deleteBtn}>
-              <button>Delete Group</button>
+              <button onClick={() => setDeleteGroupModal(true)}>
+                Delete Group
+              </button>
             </div>
             <div className={styles.deleteBtn}>
-              <button>Exit Group</button>
+              <button onClick={() => setExitGroupModal(true)}>
+                Exit Group
+              </button>
             </div>
           </div>
         ) : (
@@ -218,13 +236,12 @@ const ChatMsg = ({ msgs, yourMsg }) => {
             <span>{elem.time}</span>
           </div>
         );
-        return;
       })}
     </div>
   );
 };
 
-const Member = ({ img, name, admin }) => {
+const Member = ({ img, name, admin, removeMemberModal }) => {
   return (
     <div className={styles.partcipant}>
       <div>
@@ -233,7 +250,68 @@ const Member = ({ img, name, admin }) => {
           {name} {admin && "(admin)"}
         </p>
       </div>
-      <button>Remove</button>
+      <button onClick={() => removeMemberModal(true)}>Remove</button>
     </div>
+  );
+};
+
+const ExitGroup = ({ setModal }) => {
+  return (
+    <>
+      <div onClick={() => setModal(false)} className={styles.overlay}></div>
+      <div className={styles.smallModal}>
+        <p>
+          Are you sure you want to leave <br /> GROUP_NAME?
+        </p>
+        <div className={styles.btnDiv}>
+          <button className={styles.invertBtn} onClick={() => setModal(false)}>
+            Yes
+          </button>
+          <button className={styles.button} onClick={() => setModal(false)}>
+            No
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};
+const DeleteGroup = ({ setModal }) => {
+  return (
+    <>
+      <div onClick={() => setModal(false)} className={styles.overlay}></div>
+      <div className={styles.smallModal}>
+        <p>
+          Are you sure you want to delete <br /> GROUP_NAME?
+        </p>
+        <div className={styles.btnDiv}>
+          <button className={styles.invertBtn} onClick={() => setModal(false)}>
+            Yes
+          </button>
+          <button className={styles.button} onClick={() => setModal(false)}>
+            No
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};
+const RemoveMember = ({ setModal }) => {
+  return (
+    <>
+      <div onClick={() => setModal(false)} className={styles.overlay}></div>
+      <div className={styles.smallModal}>
+        <p>
+          Are you sure you want to remove <br /> USER_NAME?
+        </p>
+        <div className={styles.btnDiv}>
+          <button className={styles.invertBtn} onClick={() => setModal(false)}>
+            Yes
+          </button>
+          <button className={styles.button} onClick={() => setModal(false)}>
+            No
+          </button>
+        </div>
+      </div>
+    </>
   );
 };
