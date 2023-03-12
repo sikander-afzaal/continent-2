@@ -1,7 +1,7 @@
 import styles from "./ChatRoom.module.css";
 import userImg from "../../../images/user.png";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GroupPhoto from "../GroupPhoto/GroupPhoto";
 import AddMemberModal from "../AddMemberModal/AddMemberModal";
 
@@ -54,6 +54,13 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
   const [deleteGroupModal, setDeleteGroupModal] = useState(false);
   const [removeMemberModal, setRemoveMemberModal] = useState(false);
   const { id } = useParams();
+  useEffect(() => {
+    if (id == 3 || id == 4) {
+      return;
+    } else {
+      setGroupSettingsToggle(false);
+    }
+  }, [id]);
 
   return (
     <>
@@ -75,8 +82,6 @@ const ChatRoom = ({ DUMMY_MSGS }) => {
           onClick={() => {
             if (id == 3 || id == 4) {
               setGroupSettingsToggle(true);
-            } else {
-              setGroupSettingsToggle(false);
             }
           }}
           className={styles.chatHeader}
@@ -258,6 +263,8 @@ const ChatMsg = ({ msgs, yourMsg }) => {
               <span>{elem.time}</span>
             </div>
           );
+        } else {
+          return "";
         }
       })}
     </div>
