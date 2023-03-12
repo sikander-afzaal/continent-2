@@ -127,6 +127,11 @@ const NewMsgModal = ({ setOpenNewMsgModal }) => {
                     <p>{elem.name}</p>
                   </div>
                   <button
+                    style={{
+                      backgroundColor: elem.selected
+                        ? "#41c6da"
+                        : "transparent",
+                    }}
                     onClick={() => {
                       addingPeople(idx);
                     }}
