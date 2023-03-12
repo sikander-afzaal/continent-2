@@ -236,6 +236,7 @@
 @media screen and (max-width: 991px) {
   .messageWrap {
     margin-top: 165px;
+    z-index: 1;
   }
   .roomChat {
     max-height: 600px;
