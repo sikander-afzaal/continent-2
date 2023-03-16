@@ -8,40 +8,48 @@ const AddMemberModal = ({ setModal }) => {
       name: "username",
       img: userImg,
       selected: false,
+      id: 1,
     },
     {
       name: "username",
       img: userImg,
+      selected: false,
+      id: 2,
+    },
+    {
+      name: "username",
+      img: userImg,
+      id: 3,
       selected: false,
     },
     {
       name: "username",
       img: userImg,
       selected: false,
+      id: 4,
     },
     {
       name: "username",
       img: userImg,
       selected: false,
+      id: 5,
     },
     {
       name: "username",
       img: userImg,
       selected: false,
+      id: 6,
     },
     {
       name: "username",
       img: userImg,
       selected: false,
+      id: 7,
     },
     {
       name: "username",
       img: userImg,
-      selected: false,
-    },
-    {
-      name: "username",
-      img: userImg,
+      id: 8,
       selected: false,
     },
   ]);
@@ -61,7 +69,11 @@ const AddMemberModal = ({ setModal }) => {
   const removeTag = (idx) => {
     setDummyPeople((prev) => {
       const copy = [...prev];
-      copy[idx].selected = false;
+      copy.forEach((elem) => {
+        if (elem.id === idx) {
+          elem.selected = false;
+        } else return;
+      });
       return copy;
     });
   };
@@ -96,7 +108,7 @@ const AddMemberModal = ({ setModal }) => {
                   key={idx + "tagged"}
                   name={elem.name}
                   changeHandler={removeTag}
-                  idx={idx}
+                  idx={elem.id}
                 />
               );
             })}
